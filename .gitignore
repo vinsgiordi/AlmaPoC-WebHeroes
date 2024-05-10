@@ -1,0 +1,4 @@
+# Insert here the folders and files to exclude
+node_modules/
+dist/
+.idea/
