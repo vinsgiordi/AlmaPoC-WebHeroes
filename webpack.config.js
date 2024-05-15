@@ -2,11 +2,11 @@
 
 const path = require('path')
 const autoprefixer = require('autoprefixer')
-const webpack = require('webpack');
+//const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './src/js/main.js',
   output: {
     filename: 'main.js',
