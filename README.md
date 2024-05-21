@@ -32,3 +32,15 @@ Ensure the compilation process is well-organized and optimized.
 4. Customize the login and welcome pages according to project requirements.
 5. Run the project locally: npm start.
 6. Access the application via the provided URL.
+
+## Contributing
+
+Contributions to this repository are welcome! If you have suggestions for improvements, bug fixes, or new features, please open an issue or submit a pull request.
+
+## License
+
+This repository is licensed under the [MIT License](LICENSE).
+
+## Contact
+
+For any inquiries or assistance, feel free to contact [vincenzogiordano99@libero.it](mailto:your-email@example.com).
