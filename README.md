@@ -1,37 +1,34 @@
 # AlmaPoC-WebHeroes
 
-Welcome to the Web Heroes project repository! This project is a short in progress assigned to me by my team leader to test and improve my skills. It aims to develop a robust login page and a friendly dashboard for our Web Heroes application. These pages serve as initial contact points for users and play a key role in improving the overall user experience.
+## Introduction
+Welcome to the Web Heroes project repository! This project aims to enhance the authentication system of our Web Heroes application by integrating PHP and REST API to handle access requests and secure sensitive web pages.
 
-# Project Details
-## Login Page:
-The login page allows users to input their credentials to access the system.
-- Implements field validation and error handling.
-- Utilizes simulated authentication to verify user-entered credentials.
+## Project Details
+### Part 1: Login Page and Welcome Page
+The initial phase of the project focused on developing a user-friendly login page and a welcoming dashboard.
 
-## Welcome Page:
-Upon successful login, users are redirected to a welcoming dashboard
-- Features a sidebar for easy navigation within the application.
-- Incorporates a navbar for primary navigation.
-- Includes a container for the main content of the page.
-- Ensures the welcome page is aesthetically pleasing and fully functional.
-  
-# Project Configuration
-## Project Initialization:
-- Initialize the custom web project using npm.
-- Install necessary dependencies, including Bootstrap 5.2 and jQuery.
-- Configure the package.json file with project information and dependencies.
+### Part 2: Authentication System Enhancement
+Now, the project's focus shifts to improving the existing authentication system by integrating REST API to manage access requests. This update aims to make the system more robust, scalable, and compliant with development best practices.
 
-## Asset Compilation:
-Set up asset compilation to handle CSS and JavaScript files efficiently.
-Ensure the compilation process is well-organized and optimized.
+## Tasks
+### Development of REST API:
+- Create a set of REST API to handle authentication operations, including user credential validation.
+- Utilize the POST method to manage API access requests.
 
-# Getting Started
+### Integration of REST API into the Login Page:
+- Modify the login page (`login.php`) to send credentials through a POST request to the developed REST API.
+
+### Handling REST API Responses:
+- In the PHP logic of the login page (`login.php`), manage the response received from the REST API and authenticate the user accordingly.
+
+### Protection of the Protected Page:
+- Ensure that the protected page (`protected.php`) continues to secure its content by requiring authentication through the integrated REST API.
+
+## Getting Started
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
-3. Install dependencies using npm: npm install.
-4. Customize the login and welcome pages according to project requirements.
-5. Run the project locally: npm start.
-6. Access the application via the provided URL.
+3. Follow the instructions provided in each part's directory to set up and run the respective components.
+4. Customize and extend the project according to your requirements.
 
 ## Contributing
 
