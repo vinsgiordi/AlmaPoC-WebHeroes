@@ -26,6 +26,10 @@ module.exports = {
       template: './src/welcome.html',
       filename: 'welcome.html'
     }),
+    new HtmlWebpackPlugin({
+      template: './src/register.html',
+      filename: 'register.html'
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',

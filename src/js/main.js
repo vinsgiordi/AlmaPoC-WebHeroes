@@ -9,4 +9,4 @@ import Alert from 'bootstrap/js/dist/alert.js'
 import $ from "jquery";
 
 // Import our custom script
-import './validateForm.js';
+// import './validateForm.js';

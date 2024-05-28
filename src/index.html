@@ -12,7 +12,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title text-center">Login</h5>
-              <form name="formLogin" id="formLogin">
+              <form method="post" action="/php/login.php" name="formLogin" id="formLogin">
                 <div class="mb-3">
                   <label for="username" class="form-label" placeholder="Enter your username">Username</label>
                   <input type="text" class="form-control" id="username" name="username" required>
@@ -23,6 +23,10 @@
                 </div>
                 <div class="d-grid gap-2">
                   <button type="submit" class="btn btn-primary mt-3">Login</button>
+                </div>
+                <div class="mt-3 text-center">
+                  <small>Don’t have an account? <a href="register.html" class="text-decoration-none">Register now</a></small>
+                </div>
                 </div>
               </form>
             </div>
