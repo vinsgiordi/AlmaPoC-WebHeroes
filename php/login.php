@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('/database.php');
+require_once('database.php');
 
 // Se l'utente è già loggato, reindirizzalo alla dashboard
 if (isset($_SESSION['session_id'])) {

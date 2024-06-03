@@ -4,7 +4,7 @@
   "private": "true",
   "scripts": {
     "build": "webpack build --mode=production",
-    "start": "webpack serve"
+    "start": "Webpack serve"
   },
   "keywords": [],
   "author": "Giordano Vincenzo",

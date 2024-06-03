@@ -26,10 +26,6 @@ module.exports = {
       template: './src/welcome.html',
       filename: 'welcome.html'
     }),
-    new HtmlWebpackPlugin({
-      template: './src/register.html',
-      filename: 'register.html'
-    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -40,16 +36,9 @@ module.exports = {
       {
         test: /\.(scss)$/,
         use: [
+          'style-loader', // Adds CSS to the DOM by injecting a `<style>` tag
+          'css-loader', // Interprets `@import` and `url()` like `import/require()` and will resolve them
           {
-            // Adds CSS to the DOM by injecting a `<style>` tag
-            loader: 'style-loader'
-          },
-          {
-            // Interprets `@import` and `url()` like `import/require()` and will resolve them
-            loader: 'css-loader'
-          },
-          {
-            // Loader for webpack to process CSS with PostCSS
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
@@ -59,12 +48,23 @@ module.exports = {
               }
             }
           },
+          'sass-loader' // Loads a SASS/SCSS file and compiles it to CSS
+        ]
+      },
+      {
+        test: /\.html$/,
+        use: [
           {
-            // Loads a SASS/SCSS file and compiles it to CSS
-            loader: 'sass-loader'
+            loader: 'html-loader',
+            options: {
+              sources: false
+            }
           }
         ]
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.scss']
   }
 }
