@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": "true",
   "scripts": {
-    "build": "webpack build --mode=production",
-    "start": "Webpack serve"
+    "build": "webpack build --mode=production"
   },
   "keywords": [],
   "author": "Giordano Vincenzo",
@@ -16,6 +15,7 @@
     "html-minify": "^0.3.2",
     "html-webpack-plugin": "^5.6.0",
     "jquery": "^3.7.1",
+    "mini-css-extract-plugin": "^2.9.0",
     "postcss-loader": "^8.1.1",
     "sass": "^1.75.0",
     "sass-loader": "^14.2.1",

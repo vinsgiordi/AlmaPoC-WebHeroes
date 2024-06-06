@@ -3,41 +3,41 @@
 const path = require('path')
 const autoprefixer = require('autoprefixer')
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
   entry: './src/js/main.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'public/dist')
   },
   devServer: {
-    static: path.resolve(__dirname, 'dist'),
+    static: path.resolve(__dirname, 'public/dist'),
     port: 8080,
     hot: true
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: 'index.html'
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/welcome.html',
-      filename: 'welcome.html'
-    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     })
   ],
   module: {
     rules: [
       {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
         test: /\.(scss)$/,
         use: [
-          'style-loader', // Adds CSS to the DOM by injecting a `<style>` tag
-          'css-loader', // Interprets `@import` and `url()` like `import/require()` and will resolve them
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -48,18 +48,7 @@ module.exports = {
               }
             }
           },
-          'sass-loader' // Loads a SASS/SCSS file and compiles it to CSS
-        ]
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: {
-              sources: false
-            }
-          }
+          'sass-loader'
         ]
       }
     ]

@@ -10,3 +10,5 @@ import $ from "jquery";
 
 // Import our custom script
 // import './validateForm.js';
+// import './login.js';
+import './register.js';
