@@ -2,6 +2,7 @@
 require_once '../../php/database.php';
 
 $database = new Database();
+$conn = $database->getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
@@ -14,13 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    $conn = $database->getConnection();
-
     // Controlla se lo username esiste già
     $stmt = $conn->prepare('SELECT * FROM users WHERE username = :username');
     $stmt->execute(['username' => $username]);
     if ($stmt->fetch()) {
-        http_response_code(409); // Conflitto
         echo json_encode(['status' => 'error', 'message' => 'Username già esistente']);
         exit;
     }
@@ -42,3 +40,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     http_response_code(405);
     echo json_encode(['status' => 'error', 'message' => 'Metodo non consentito']);
 }
+?>

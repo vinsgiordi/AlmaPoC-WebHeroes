@@ -1,38 +1,51 @@
 <?php
-include_once '../../php/database.php';
-
+session_start();
 header('Content-Type: application/json');
 
-$action = $_GET['action'];
+$action = $_GET['action'] ?? '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = json_decode(file_get_contents('php://input'), true);
+if ($action === 'login') {
+    require_once '../../php/database.php';
 
-    if ($action === 'register') {
-        $username = $data['username'];
-        $password = password_hash($data['password'], PASSWORD_BCRYPT);
+    $input = json_decode(file_get_contents('php://input'), true);
+    $username = $input['username'] ?? '';
+    $password = $input['password'] ?? '';
 
-        $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-        if ($stmt->execute([$username, $password])) {
-            echo json_encode(['status' => 'success']);
+    if ($username && $password) {
+        $database = new Database();
+        $pdo = $database->getConnection();
+
+        if ($pdo) {
+            try {
+                $stmt = $pdo->prepare('SELECT * FROM users WHERE username = :username');
+                $stmt->execute(['username' => $username]);
+                $user = $stmt->fetch();
+
+                if ($user && password_verify($password, $user['password'])) {
+                    $_SESSION['user_id'] = $user['id'];
+                    echo json_encode(['status' => 'success', 'message' => 'Login successful']);
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Invalid credentials']);
+                }
+            } catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+            }
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Registration failed']);
+            echo json_encode(['status' => 'error', 'message' => 'Database connection error']);
         }
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Missing username or password']);
     }
-
-    if ($action === 'login') {
-        $username = $data['username'];
-        $password = $data['password'];
-
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->execute([$username]);
-        $user = $stmt->fetch();
-
-        if ($user && password_verify($password, $user['password'])) {
-            echo json_encode(['status' => 'success']);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Login failed']);
-        }
+} elseif ($action === 'check_auth') {
+    if (isset($_SESSION['user_id'])) {
+        echo json_encode(['status' => 'authenticated']);
+    } else {
+        echo json_encode(['status' => 'unauthenticated']);
     }
+} elseif ($action === 'logout') {
+    session_destroy();
+    echo json_encode(['status' => 'success', 'message' => 'Logout successful']);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid action']);
 }
 ?>
